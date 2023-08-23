@@ -1,0 +1,23 @@
+= bare-metal-de10-cheri-bgas
+
+Minimal baremetal skeleton for de10 cheri-bgas system.
+The repository provides a `libcheribgas_de10_bare` library and a `link.ld` linker script to compile a baremetal piece of C code for the de10 CHERI-BGAS system.
+
+== libcheribgas_de10_bare
+
+`libcheribgas_de10_bare` provides a few uart functions to enable reporting on a console.
+  
+[code,c]
+---------
+void uart_init();
+int putchar(int c);
+int puts(const char *s);
+int getchar(void);
+char* printhex(int value);
+---------
+
+== linking
+
+Linking against `libcheribgas_de10_bare` should done using the provided `link.ld`.
+This script defines the address of the uart, and sets the entry point to eventually reach a user defined `main` function.
+The distributed `Makefile` provides an example of compiling a simple main function and linking properly.
